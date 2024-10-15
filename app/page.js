@@ -1,7 +1,11 @@
+import dynamic from "next/dynamic";
 import Circular from "@/components/circular";
-import MonitoringCam from "@/components/monitoring";
+
+// Import MonitoringCam secara dinamis
+const MonitoringCam = dynamic(() => import("@/components/monitoring"), {
+  ssr: false, // Nonaktifkan SSR untuk komponen ini
+});
 import Result from "@/components/result";
-import Image from "next/image";
 
 export default function Home() {
   return (

@@ -95,7 +95,7 @@ const Result = () => {
                     <>
                         {/* Div untuk gambar Surface */}
                         {camera1Images.surface && (
-                            <div className="w-[200px] h-[200px] flex flex-col items-center justify-center">
+                            <div className="w-[180px] h-[180px] flex flex-col items-center justify-center">
                                 <h1>Surface</h1>
                                 <div className="mb-4">
                                     <img src={camera1Images.surface.url} alt="Kamera 1 - Surface" className="w-full h-full object-cover" />
@@ -115,7 +115,7 @@ const Result = () => {
 
                         {/* Div untuk gambar Underwater */}
                         {camera1Images.underwater && (
-                            <div className="w-[200px] h-[200px] flex flex-col items-center justify-center">
+                            <div className="w-[180px] h-[180px] flex flex-col items-center justify-center">
                                 <h1>Under water</h1>
                                 <div className="mb-4">
                                     <img src={camera1Images.underwater.url} alt="Kamera 1 - Underwater" className="w-full h-full object-cover" />
