@@ -7,8 +7,8 @@ import { query, ref as dbRef, onValue, limitToLast } from 'firebase/database';
 
 const Result = () => {
     const [camera1Images, setCamera1Images] = useState({
-        surface: null,
-        underwater: null,
+        surface: { url: null, geotag: null },
+        underwater: { url: null, geotag: null },
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -33,10 +33,9 @@ const Result = () => {
         return () => unsubscribe();
     }, []);
 
-    // Fungsi untuk mengambil gambar dari bucket Firebase Storage
     const fetchImages = async (folderPath, sensorIndex) => {
         try {
-            const folderRef = ref(storage, folderPath); // folderPath adalah path ke folder dalam bucket
+            const folderRef = ref(storage, folderPath);
             const result = await listAll(folderRef);
             const sortedItems = result.items.sort((a, b) => b.name.localeCompare(a.name));
             const latestItem = sortedItems[0]; // Ambil file paling baru
@@ -65,10 +64,15 @@ const Result = () => {
             const surfaceImage = await fetchImages('/GreenBox', 0);
             const underwaterImage = await fetchImages('/BlueBox', 1);
 
-            setCamera1Images({
-                surface: surfaceImage,
-                underwater: underwaterImage,
-            });
+            // Update only if the new image URL is different from the current one
+            setCamera1Images((prevState) => ({
+                surface: surfaceImage.url !== prevState.surface.url
+                    ? surfaceImage
+                    : prevState.surface,
+                underwater: underwaterImage.url !== prevState.underwater.url
+                    ? underwaterImage
+                    : prevState.underwater,
+            }));
         } catch (error) {
             setError('Failed to load images.');
         } finally {
@@ -83,7 +87,6 @@ const Result = () => {
         return () => clearInterval(interval);
     }, [sensorData]);
 
-
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="flex md:flex-row flex-col gap-8 justify-center mb-4">
@@ -94,7 +97,7 @@ const Result = () => {
                 ) : (
                     <>
                         {/* Div untuk gambar Surface */}
-                        {camera1Images.surface && (
+                        {camera1Images.surface.url && (
                             <div className="w-[180px] h-[180px] flex flex-col items-center justify-center">
                                 <h1>Surface</h1>
                                 <div className="mb-4">
@@ -114,7 +117,7 @@ const Result = () => {
                         )}
 
                         {/* Div untuk gambar Underwater */}
-                        {camera1Images.underwater && (
+                        {camera1Images.underwater.url && (
                             <div className="w-[180px] h-[180px] flex flex-col items-center justify-center">
                                 <h1>Under water</h1>
                                 <div className="mb-4">
