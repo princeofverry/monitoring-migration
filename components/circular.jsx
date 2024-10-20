@@ -10,7 +10,7 @@ const Circular = () => {
     const [sensorData, setSensorData] = useState(null); // State untuk menyimpan data terbaru
 
     useEffect(() => {
-        const sensorDataRef = query(ref(db, '/sensorData'), limitToLast(1)); // Query untuk mengambil data terbaru
+        const sensorDataRef = query(ref(db, '/espSensorData'), limitToLast(1)); // Query untuk mengambil data terbaru
 
         // Memasang listener untuk memantau perubahan data
         const unsubscribe = onValue(sensorDataRef, (snapshot) => {
@@ -63,7 +63,7 @@ const Circular = () => {
                         <div className="flex flex-col items-center gap-2">
                             <p className="font-semibold">COG</p>
                             <div className="border border-gray-500 md:text-lg text-sm md:w-20 md:h-20 w-16 h-16 rounded-full flex items-center justify-center">
-                                {sensorData ? `${sensorData.azimuth}°` : "Loading..."}
+                                {sensorData ? `${sensorData.heading}°` : "Loading..."}
                             </div>
                         </div>
                         <div className="flex flex-col items-center gap-2">

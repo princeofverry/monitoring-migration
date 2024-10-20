@@ -15,7 +15,7 @@ const Result = () => {
     const [sensorData, setSensorData] = useState([]);
 
     useEffect(() => {
-        const sensorDataRef = query(dbRef(db, '/sensorData'), limitToLast(2));
+        const sensorDataRef = query(dbRef(db, '/espSensorData'), limitToLast(2));
 
         const unsubscribe = onValue(sensorDataRef, (snapshot) => {
             if (snapshot.exists()) {

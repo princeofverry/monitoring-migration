@@ -51,7 +51,7 @@ const MonitoringCam = () => {
 
     useEffect(() => {
         const fetchCoordinates = () => {
-            const coordinatesRef = query(ref(db, '/sensorData'), limitToLast(1));
+            const coordinatesRef = query(ref(db, '/espSensorData'), limitToLast(1));
 
             onValue(coordinatesRef, (snapshot) => {
                 if (snapshot.exists()) {
