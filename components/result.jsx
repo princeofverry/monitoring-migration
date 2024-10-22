@@ -5,6 +5,18 @@ import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { storage, db } from '../lib/firestore';
 import { query, ref as dbRef, onValue, limitToLast } from 'firebase/database';
 
+const SkeletonLoader = () => (
+    <div className="w-[180px] h-[180px] flex flex-col items-center justify-center">
+        <div className="w-full h-full bg-gray-200 animate-pulse"></div>
+        <div className="text-black text-xs mt-2 space-y-1">
+            <div className="w-16 h-4 bg-gray-200 animate-pulse"></div>
+            <div className="w-24 h-4 bg-gray-200 animate-pulse"></div>
+            <div className="w-16 h-4 bg-gray-200 animate-pulse"></div>
+            <div className="w-32 h-4 bg-gray-200 animate-pulse"></div>
+        </div>
+    </div>
+);
+
 const Result = () => {
     const [camera1Images, setCamera1Images] = useState({
         surface: { url: null, geotag: null },
@@ -64,7 +76,6 @@ const Result = () => {
             const surfaceImage = await fetchImages('/GreenBox', 0);
             const underwaterImage = await fetchImages('/BlueBox', 1);
 
-            // Update only if the new image URL is different from the current one
             setCamera1Images((prevState) => ({
                 surface: surfaceImage.url !== prevState.surface.url
                     ? surfaceImage
@@ -91,7 +102,10 @@ const Result = () => {
         <div className="flex flex-col items-center justify-center">
             <div className="flex md:flex-row flex-col gap-8 justify-center mb-4">
                 {loading ? (
-                    <p>Loading Kamera images...</p>
+                    <>
+                        <SkeletonLoader />
+                        <SkeletonLoader />
+                    </>
                 ) : error ? (
                     <p>{error}</p>
                 ) : (
@@ -119,7 +133,7 @@ const Result = () => {
                         {/* Div untuk gambar Underwater */}
                         {camera1Images.underwater.url && (
                             <div className="w-[180px] h-[180px] flex flex-col items-center justify-center">
-                                <h1>Under water</h1>
+                                <h1>Underwater</h1>
                                 <div className="mb-4">
                                     <img src={camera1Images.underwater.url} alt="Kamera 1 - Underwater" className="w-full h-full object-cover" />
                                     <div className="text-black text-xs">
