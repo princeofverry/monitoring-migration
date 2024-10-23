@@ -154,7 +154,7 @@ const MonitoringCam = () => {
                     ))}
                 </MapContainer>
             </div>
-            <button className="bg-blue-400 p-2 rounded-lg text-center" onClick={handleTrackChange}>Ganti Lintasan</button>
+            <button className="bg-blue-400 text-white hover:bg-blue-600 duration-300 p-2 rounded-lg text-center" onClick={handleTrackChange}>Ganti Lintasan</button>
         </div>
     );
 };

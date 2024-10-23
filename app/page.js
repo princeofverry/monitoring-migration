@@ -9,7 +9,7 @@ import Result from "@/components/result";
 
 export default function Home() {
   return (
-    <div className="flex md:flex-row flex-col gap-4">
+    <div className="flex md:flex-row flex-col gap-4 items-center justify-center">
       <MonitoringCam />
       <Circular />
       <Result />
