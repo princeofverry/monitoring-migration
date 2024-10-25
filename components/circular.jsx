@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 // import MonitoringCam from "./monitoring";
 import { ref, onValue, query, limitToLast } from "firebase/database";
 import { db } from "../lib/firestore";
+import Mission from "./mission";
 // import Result from "./result";
 
 const Circular = () => {
@@ -62,19 +63,19 @@ const Circular = () => {
                     <div className="flex flex-row gap-x-12 md:text-lg text-base">
                         <div className="flex flex-col items-center gap-2">
                             <p className="font-semibold">COG</p>
-                            <div className="border border-gray-500 md:text-lg text-sm md:w-20 md:h-20 w-16 h-16 rounded-full flex items-center justify-center">
+                            <div className="border border-gray-500 md:text-lg text-xs md:w-20 md:h-20 w-16 h-16 rounded-full flex items-center justify-center">
                                 {sensorData ? `${sensorData.heading}°` : "Loading..."}
                             </div>
                         </div>
                         <div className="flex flex-col items-center gap-2">
                             <p className="font-semibold">SOG</p>
-                            <div className="border border-gray-500 text-sm md:w-20 md:h-20 w-16 h-16 rounded-full flex items-center justify-center">
+                            <div className="border border-gray-500 text-xs md:w-20 md:h-20 w-16 h-16 rounded-full flex items-center justify-center">
                                 {sensorData ? `${(sensorData.speed_ms / 0.514444).toFixed(2)} knot` : "Loading..."}
                             </div>
                         </div>
                         <div className="flex flex-col items-center gap-2">
                             <p className="font-semibold">SOG</p>
-                            <div className="border border-gray-500 text-sm md:w-20 md:h-20 w-16 h-16 rounded-full flex items-center justify-center">
+                            <div className="border border-gray-500 text-xs md:w-20 md:h-20 w-16 h-16 rounded-full flex items-center justify-center">
                                 {sensorData ? `${(sensorData.speed_ms * 3.6).toFixed(2)} km/h` : "Loading..."}
                             </div>
                         </div>
@@ -82,6 +83,7 @@ const Circular = () => {
                     <h1>
                         Latest data: {sensorData ? sensorData.timestamp : "Loading..."}
                     </h1>
+                    <Mission />
                 </div>
                 {/* <Result /> */}
             </div>
