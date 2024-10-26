@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { getDatabase, ref, onValue } from "firebase/database"; // Pastikan Firebase sudah terkonfigurasi dengan benar
+import Time from './time';
 
 const Mission = () => {
     const [ball, setBall] = useState(null); // State untuk menyimpan data dari Firebase
@@ -47,6 +48,7 @@ const Mission = () => {
             <p style={{ fontWeight: start ? 'bold' : 'normal' }}>Start</p>
             <p>Floating Ball {ball !== null ? ball : 'Loading...'}</p>
             <p style={{ fontWeight: finish ? 'bold' : 'normal' }}>Finish</p>
+            <Time />
         </div>
     );
 };
