@@ -67,7 +67,6 @@ const Aterkia = () => {
 
   return (
     <div className="shadow p-4">
-      <h1 className="text-center">Aterkia</h1>
       <div className="mt-4">
         <label htmlFor="ball" className="block mb-2">Ball (Number):</label>
         <input

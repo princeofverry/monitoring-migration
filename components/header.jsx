@@ -1,9 +1,16 @@
+'use client'
 import React from 'react'
+import { usePathname } from 'next/navigation'
 
 const Header = () => {
+    const pathname = usePathname();
+
+    // Hide the header only on the /aterkia path
+    if (pathname === '/aterkia') return null;
+
     return (
         <>
-            <div className="relative flex flex-row items-center justify-around py-2 bg-gradient-to-b from-blue-500 to-[#60A5FA]">
+            <div className="relative flex flex-row items-center justify-around py-2">
                 <div className='flex flex-row items-center font-semibold gap-2'>
                     <img src="/aterkia.png" alt="logo-ater" className='md:w-16 md:h-16 w-16' />
                     <p className='md:text-xl text-xs md:block hidden text-black font-semibold'>ATERKIA</p>
